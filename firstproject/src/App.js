@@ -7,9 +7,7 @@ function App() {
       <div style={{ margin: '0 auto', width: '100px' }}>
         <Massage text='text for props'></Massage>
       </div>
-
     </>
-
   )
 }
 
