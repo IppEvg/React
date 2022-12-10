@@ -10,9 +10,10 @@
 }
 .ul{
    border: 2px solid  #4f8d9c;
-   min-height: 30px;
-   max-height: 600px;
+   min-height: 40px;
+   max-height: 200px;
    border-radius: 5px;
+   overflow:auto;
 }
 .li{
    list-style-type:none;
