@@ -1,3 +1,21 @@
+
+.box{
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   min-height: 175px;
+}
+.left{
+   margin-top: 40px;
+   margin-right: 10px;
+   min-width: 100px;
+   border: 1px solid black;
+   height: 175px;
+   align-self: flex-end;
+
+}
+
+
 .color{
    color: #0000CD;
    background-color:  #7FFF00;

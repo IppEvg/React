@@ -1,10 +1,11 @@
-import { useState, useRef  } from 'react'
+import { useState, useRef, useEffect  } from 'react'
 import styles from './func/message.module.scss'
 import{ Button }from './Ui/Button'
 
+
 function Form({addMessage}) {
 
-let myRef = useRef()
+const myRef = useRef(null)
 
 const [text,setText]=useState('')
 
@@ -16,6 +17,10 @@ addMessage({
 })
 setText('');
 }
+useEffect(() => {
+    console.log(myRef.current.classList)
+myRef.current?.focus();
+}, [text]);
     return (
         <>
             <form className={styles.form} onSubmit={handleSubmit}>
@@ -24,7 +29,8 @@ setText('');
                 ref={myRef}
                 className={styles.textarea}
                 value={text}
-                onChange={addChange} >
+                onChange={addChange} 
+                >
                 </input>
                 <Button type='submit'>Send</Button>
             </form>

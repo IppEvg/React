@@ -1,12 +1,7 @@
 import styles from './message.module.scss'
-import { useState,useEffect } from 'react'
+
 
 function MessageList({text,messages}) {
-
-    
-    // useEffect(() => {
-    //     setMessagesList(messagesList = [...props.message])
-    // })
 
     return (
         <>
