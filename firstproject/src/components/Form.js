@@ -13,12 +13,14 @@ const addChange=(e)=>{setText(e.target.value)}
 const handleSubmit=(e)=>{e.preventDefault();
 addMessage({
     name:'you',
-    text:text
+    text:text,
+    toString: function() {
+        return this.name +' : ' + this.text;
+      }
 })
 setText('');
 }
 useEffect(() => {
-    console.log(myRef.current.classList)
 myRef.current?.focus();
 }, [text]);
     return (

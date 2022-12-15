@@ -1,56 +1,49 @@
-import MessageList from './components/func/MessageList'
-import styles from './components/func/message.module.scss'
-import { useState, useEffect} from 'react'
-import Form from './components/Form'
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-
+import { Header } from './components/Header'
+import { Routes,Route} from 'react-router-dom'
+import{HomePage} from './pages/HomePage'
+import {UserPage} from './pages/UserPage'
+import { ChatPage } from './pages/ChatPage'
+import {nanoid} from 'nanoid'
+import { useState } from 'react'
 
 function App() {
-  const [messages, setMessages] = useState([])
-  const addMessage=(newMessage)=>{
-    setMessages([...messages,newMessage]);
-  }
-  useEffect(()=>{
-    if(messages.length>0 && messages[messages.length-1].name!=='Bot')
-    {
-      let timeout= setTimeout(()=>{addMessage({
-      name:'Bot',
-      text:'Hello, I am Bot! I am not here yet, but I will be soon.'
-    })},1700);
-    return()=>{
-    clearTimeout(timeout)
-  }
+  const [chat, setChat] = useState([{id:nanoid(), name:'chat 1',text:[''],show:true},{id:nanoid(), name:'chat 2',text:[''],show:false}])
+  const addChats =(newChat)=>{
+    setChat([...chat,newChat])
 }
-  
-},[messages])
-  
+const addText = (text)=>{
+  let newString=chat.findIndex((item)=>item.id===id);
+  chat[newString].text=[...chat[newString].text, text]
+}
+// const delChat = (name)=>{
+//   console.log(name);
+//   chat=chat.splise(chat.find((i)=>{i.name===name},1))
+// }
+let id = chat[0].id;
+const changeChat = function(i){
+  id = i.id;
+  let index=chat.indexOf(i);
+  chat.map((el)=>{
+    el.show=false;
+  });
+  chat[index].show=true;
+}
+
+
+
   return (
     <>
-      <h1 style={{ textAlign: 'center', }}>Chat</h1>
-      <div className={styles.box}>
-      <div className={styles.left}>
-      <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary="id:1 name:chat 1" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary="id:2 name:chat 2" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </div>
-      <div style={{ width: '500px' }}>
-        <MessageList text='Messages' messages={messages}></MessageList>
-        <Form addMessage={addMessage}></Form>
-      </div>
-      </div>
-    </>
+      <Routes>
+        <Route path='/' element={<Header></Header>}>
+            <Route index element={<HomePage chat={chat}  addText={addText} changeChat={changeChat}/>}>
+              {/* <Route path=':chatId' ></Route> */}
+            </Route>
+            <Route path="user" element={<UserPage />} />
+            <Route path="chats" element={<ChatPage chat={chat} addChats={addChats} />}/>
+        </Route>
+        <Route path="*" element={<h2>error 404 </h2>} />
+      </Routes>
+      </>
   )
 }
 
