@@ -5,6 +5,8 @@ import {UserPage} from './pages/UserPage'
 import { ChatPage } from './pages/ChatPage'
 import {nanoid} from 'nanoid'
 import { useState } from 'react'
+import { Provider } from 'react-redux'
+import { store } from './store'
 
 function App() {
   const [chat, setChat] = useState([{id:nanoid(), name:'chat 1',text:[''],show:true},{id:nanoid(), name:'chat 2',text:[''],show:false}])
@@ -33,16 +35,17 @@ const changeChat = function(i){
 
   return (
     <>
-      <Routes>
-        <Route path='/' element={<Header></Header>}>
-            <Route index element={<HomePage chat={chat}  addText={addText} changeChat={changeChat}/>}>
-              {/* <Route path=':chatId' ></Route> */}
-            </Route>
-            <Route path="user" element={<UserPage />} />
-            <Route path="chats" element={<ChatPage chat={chat} addChats={addChats} />}/>
-        </Route>
-        <Route path="*" element={<h2>error 404 </h2>} />
-      </Routes>
+      <Provider store={store}>
+        <Routes>
+          <Route path='/' element={<Header></Header>}>
+              <Route index element={<HomePage chat={chat}  addText={addText} changeChat={changeChat}/>}>
+              </Route>
+              <Route path="user" element={<UserPage />} />
+              <Route path="chats" element={<ChatPage chat={chat} addChats={addChats} />}/>
+          </Route>
+          <Route path="*" element={<h2>error 404 </h2>} />
+          </Routes>
+        </Provider>
       </>
   )
 }
