@@ -3,13 +3,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import styles from './func/message.module.scss'
-
-export function ListChats({chat,changeChat}){
+import {useSelector} from "react-redux"
+export function ListChats({changeChat}){
 
 //   const deleteChat = (e)=>{
 //     e.preventDefault();
 //     delChat(e.target.parentNode.firstChild.innerText); 
 // }
+const chat = useSelector((store)=>store.messages)
     const handleChange=(e)=>{
       changeChat(chat.find((i)=>i.name === e.target.innerText)); 
     }
