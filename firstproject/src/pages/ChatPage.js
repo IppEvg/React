@@ -13,8 +13,6 @@ export function ChatPage({delChat}){
         e.preventDefault();
         if (name!==''){
         dispatch(addChat({id:nanoid(), name:name,text:[],show:false}))
-            // let newChat={id:nanoid(), name:name,text:[],show:false}
-            // addChats(newChat)
         }
         setName('')
     }

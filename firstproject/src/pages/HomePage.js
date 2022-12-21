@@ -7,6 +7,7 @@ import {useSelector} from "react-redux"
 
 export function HomePage() {
   const chat = useSelector((store)=>store.messages)
+  
     const [messages, setMessages] = useState([])
     const addMessage=(newMessage)=>{
       let text = newMessage.toString();
@@ -29,29 +30,29 @@ export function HomePage() {
     }
   },[messages])
   
-  let id = chat[0].id;
-const changeChat = function(i){
-  id = i.id;
-  let index=chat.indexOf(i);
-  chat.map((el)=>{
-    el.show=false;
-  });
-  chat[index].show=true;
-}
+ 
 
 const addText = (text)=>{
-  let newString=chat.findIndex((item)=>item.id===id);
+  let newString=chat.findIndex((item)=>item.show===true);
   chat[newString].text=[...chat[newString].text, text]
+}
+
+const handleChange=(e)=>{
+  chat.map((i)=>i.show=false);
+  let checked =chat.find((i)=>i.name === e.target.innerText)
+  checked.show=true; 
+  console.log(checked);
 }
     return (
       <>
         <h1 style={{ textAlign: 'center' }}>Chat</h1>
         <div className={styles.box}>
           <div className={styles.left}>
-            <ListChats changeChat={changeChat}></ListChats>
+            <ListChats handleChange={handleChange}></ListChats>
           </div>
         <div style={{ width: '500px' }}>
-          <MessageList title='Messages' chat={chat} ></MessageList>
+          <MessageList title='Messages' chat={chat} handleChange={handleChange} >
+          </MessageList>
               <Form addMessage={addMessage}></Form>
         </div>
         </div>
