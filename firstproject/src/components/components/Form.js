@@ -16,7 +16,7 @@ function Form({ chat, addText }) {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addMes(messages.id, `you : ${text}`));
+        dispatch(addMes(messages.id, `'you : ${text}'`));
         setText("");
         addText(`'you : ${text}'`)
     }
