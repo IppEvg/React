@@ -12,8 +12,9 @@ export function HomePage() {
   const addText = (string) => [...chat.find((i) => i.show === true).text, string]
   const chat = useSelector((store) => store.messages)
   const dispatch = useDispatch();
+  let messages
   const item = chat.find((i) => i.show === true)
-  const messages = item.text
+  if (item) { messages = item.text }
   const changeChat =
     (id) => {
       dispatch(setChat(id));

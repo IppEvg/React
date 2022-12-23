@@ -12,7 +12,9 @@ export function ListChats({ changeChat }) {
 
   const chat = useSelector((store) => store.messages)
   const handleChange = (e) => {
-    changeChat(chat.find((i) => i.name === e.target.innerText).id);
+    if (chat.find((i) => i.name === e.target.innerText)) {
+      changeChat(chat.find((i) => i.name === e.target.innerText).id);
+    }
   }
   const dispatch = useDispatch()
 

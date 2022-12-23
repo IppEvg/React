@@ -19,9 +19,12 @@ function Form({ chat, addText }) {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addMesWithReply(messages.id, `you : ${text}`));
-        setText("");
-        addText(`'you : ${text}'`)
+
+        if (messages) {
+            dispatch(addMesWithReply(messages.id, `you : ${text}`));
+            setText("");
+            addText(`'you : ${text}'`)
+        }
     }
 
     useEffect(() => {
