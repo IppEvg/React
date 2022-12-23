@@ -10,6 +10,7 @@ export function UserPage() {
         dispatch({ type: "CHANGE_CHECKBOX", payload: value })
         setValue(!value)
     }
+
     return (
         <>
             <h2>User Page</h2>

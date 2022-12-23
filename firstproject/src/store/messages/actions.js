@@ -16,6 +16,21 @@ export const addMes = (id, message) => ({
     type: ADD_MESSAGE,
     payload: { id, message }
 })
+export const addMesWithReply = (id, message) => (dispatch) => {
+    dispatch(addMes(id, message))
+    const botText = 'Bot : Hello, I am Bot! I am not here yet, but I will be soon.';
+    if (message !== botText) {
+        let timeout = setTimeout(() => {
+            dispatch(addMes(id, botText));
+        }, 1000);
+        return () => {
+            clearTimeout(timeout)
+        }
+    } else {
+
+    }
+
+}
 export const delChat = (id) => ({
     type: DEL_CHAT,
     payload: id

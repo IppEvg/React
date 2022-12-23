@@ -20,7 +20,6 @@ export const MessageReducer = (state = initialState, action) => {
       const elShown = state.find((item) => item.id === payload);
       state.map((i) => i.show = false);
       elShown.show = true;
-      console.log(state);
       return [...state]
 
     case ADD_MESSAGE:

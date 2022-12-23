@@ -13,7 +13,6 @@ export function MessageList({ title, messages }) {
                     ))}
                 </ul>
             </div>
-
         </>
     )
 }
