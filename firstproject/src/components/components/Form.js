@@ -1,10 +1,7 @@
-import { Button } from './Ui/Button'
-import { Input } from './Input'
-import styles from './func/message.module.scss'
-
-
 import { useState, useRef, useEffect } from 'react'
-import { addMesWithReply } from '../store/messages/actions'
+import { addMes } from '../store/messages/actions'
+import styles from './func/message.module.scss'
+import { Button } from './Ui/Button'
 import { useDispatch } from 'react-redux'
 
 
@@ -19,24 +16,25 @@ function Form({ chat, addText }) {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addMesWithReply(messages.id, `you : ${text}`));
+        dispatch(addMes(messages.id, `'you : ${text}'`));
         setText("");
         addText(`'you : ${text}'`)
     }
 
     useEffect(() => {
         myRef.current?.focus();
-    }, [chat]);
-
+    }, [messages]);
     return (
         <>
             <form className={styles.form} onSubmit={handleSubmit} >
-                <Input
-                    myRef={myRef}
-                    text={text}
-                    addChange={addChange}
+                <input
+                    placeholder="your massage"
+                    ref={myRef}
+                    className={styles.textarea}
+                    value={text}
+                    onChange={addChange}
                 >
-                </Input>
+                </input>
                 <Button type='submit'>Send</Button>
             </form>
         </>
