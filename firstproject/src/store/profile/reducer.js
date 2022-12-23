@@ -3,7 +3,7 @@
     useProfile:0
 }
 
-export const profileReducer=(state=initialState,action)=>{
+export const profileToggle=(state=initialState,action)=>{
 
 
     const {type,payload}=action
