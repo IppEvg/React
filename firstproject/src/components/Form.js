@@ -8,7 +8,7 @@ import { addMesWithReply } from '../store/messages/actions'
 import { useDispatch } from 'react-redux'
 
 
-function Form({ chat, addText }) {
+function Form({ chat }) {
 
     const messages = chat.find((i) => i.show === true)
     const myRef = useRef(null)
@@ -19,11 +19,9 @@ function Form({ chat, addText }) {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-
         if (messages) {
             dispatch(addMesWithReply(messages.id, `you : ${text}`));
             setText("");
-            addText(`'you : ${text}'`)
         }
     }
 

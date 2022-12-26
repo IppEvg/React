@@ -32,6 +32,6 @@ export const MessageReducer = (state = initialState, action) => {
       chats.splice(chats.findIndex((e) => e.id === payload), 1)
       return Object.assign(chats)
 
-    default: return [...state]
+    default: return state
   }
 }

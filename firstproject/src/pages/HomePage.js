@@ -9,7 +9,6 @@ import { setChat } from '../store/messages/actions'
 
 export function HomePage() {
 
-  const addText = (string) => [...chat.find((i) => i.show === true).text, string]
   const chat = useSelector((store) => store.messages)
   const dispatch = useDispatch();
   let messages
@@ -30,7 +29,7 @@ export function HomePage() {
         </div>
         <div style={{ width: '500px' }}>
           <MessageList title='Messages' chat={chat} messages={messages}></MessageList>
-          <Form chat={chat} addText={addText}></Form>
+          <Form chat={chat} ></Form>
         </div>
       </div>
     </>

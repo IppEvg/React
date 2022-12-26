@@ -26,8 +26,6 @@ export const addMesWithReply = (id, message) => (dispatch) => {
         return () => {
             clearTimeout(timeout)
         }
-    } else {
-
     }
 
 }

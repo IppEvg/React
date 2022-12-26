@@ -7,6 +7,9 @@ import { Header } from './components/Header'
 import { HomePage } from './pages/HomePage'
 import { UserPage } from './pages/UserPage'
 import { ChatPage } from './pages/ChatPage'
+import { ArticlesPage } from './pages/ArticlesPage'
+import { SignIn } from './pages/SignIn'
+import { SignUp } from './pages/SignUp'
 
 
 function App() {
@@ -20,6 +23,9 @@ function App() {
               </Route>
               <Route path="user" element={<UserPage />} />
               <Route path="chats" element={<ChatPage />} />
+              <Route path="articles" element={<ArticlesPage />} />
+              <Route path="signin" element={<SignIn />} />
+              <Route path="signup" element={<SignUp />} />
             </Route>
             <Route path="*" element={<h2>error 404 </h2>} />
           </Routes>
