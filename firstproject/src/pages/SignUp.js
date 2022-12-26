@@ -8,9 +8,9 @@ export function SignUp() {
             <form>
                 <p>Login:</p>
                 <input
-                    placeholder='Login'
-                    value={login}
-                    type='text'
+                    // placeholder='Login'
+                    // value={login}
+                    // type='text'
                 ></input>
             </form>
         </>

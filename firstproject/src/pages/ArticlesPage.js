@@ -1,4 +1,3 @@
-// import { useSelector, useDispatch } from "react-redux"
 import { useState } from "react"
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -38,7 +37,6 @@ export function ArticlesPage() {
 
     return (
         <>
-
             <div className={styles.wrapNews}>
                 <h2>Informstion news articles</h2>
                 <Button
