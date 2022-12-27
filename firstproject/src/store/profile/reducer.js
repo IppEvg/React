@@ -1,20 +1,26 @@
 
- const initialState = {
-    useProfile:0
+const initialState = {
+    useProfile: false,
+    isAuth: false
 }
 
-export const profileToggle=(state=initialState,action)=>{
+export const profileToggle = (state = initialState, action) => {
 
 
-    const {type,payload}=action
-    switch(type){
+    const { type, payload } = action
+    switch (type) {
         case 'CHANGE_CHECKBOX':
-            return{
+            return {
                 ...state,
-                useProfile:!payload
+                useProfile: !payload,
             }
-            default:
-                return state
-        }
+        case 'CHANGE_AUTH':
+            return {
+                ...state,
+                isAuth: payload
             }
-    
+        default:
+            return state
+    }
+}
+

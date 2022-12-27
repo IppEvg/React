@@ -9,19 +9,26 @@
 }
 .flexRow{
    display: grid;
-   grid-template-columns: 2.7fr 1fr;
+   grid-template-columns: 4fr 1fr;
 
 }
-.ul{
-   
+ul{
+   display: flex;
    flex-direction: row;
-   justify-content: space-around;
+   justify-content: center;
+   align-items: center;
+}
+.ulRight{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
    align-items: center;
 }
 .link{
-   margin: 0px 10px;
+   margin: 2px 10px;
    border-radius: 4px;
    text-decoration: none;
+   min-width: 70px;
 }
 .textLink{
    text-decoration: none;
@@ -78,6 +85,7 @@
    border-radius: 4px;
    background-color: #40409c;
    color: aliceblue;
+   min-width: 70px;
    &:hover{
       background-color: aliceblue;
       color: #40409c;

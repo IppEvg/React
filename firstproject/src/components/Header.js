@@ -1,5 +1,5 @@
-
 import { Outlet, NavLink } from 'react-router-dom'
+
 import styles from '../components/func/message.module.scss'
 
 export const navigation = [
@@ -57,9 +57,8 @@ export function Header() {
                             </button>
                         ))}
                     </ul>
-                    <ul>
+                    <ul className={styles.ulRight}>
                         {navigationSign.map((e) => (
-
                             <button key={e.id} className={styles.link}>
                                 <NavLink
                                     className={styles.textLink}

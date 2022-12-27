@@ -11,26 +11,29 @@ import { Button } from '../components/Ui/Button'
 import { api } from "../contants";
 import styles from '../components/func/message.module.scss'
 
-
+import { useDispatch, useSelector } from 'react-redux'
+import { addArticlesWithReply, addArticles, addError, addLoading } from '../store/articles/actions'
 export function ArticlesPage() {
 
-    const [articles, setArticles] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
+    const articles = useSelector((store) => store.articles);
+    const dispatch = useDispatch();
+    // const [articles, setArticles] = useState([]);
+    // const [loading, setLoading] = useState(false);
+    // const [error, setError] = useState('');
     const getFetchArticles = async () => {
-        setLoading(true);
-        setError('');
+        dispatch(addLoading(true));
+        dispatch(addError(''));
         try {
             const res = await fetch(api);
             if (res.ok) {
                 const data = await res.json()
-                setArticles(data)
+                dispatch(addArticlesWithReply(data))
             }
         } catch (error) {
-            setError(error.message)
+            dispatch(addError(error.message))
         }
         finally {
-            setLoading(false)
+            dispatch(addLoading(false))
         }
     }
 
@@ -44,12 +47,12 @@ export function ArticlesPage() {
                     className={styles.button}
                     onClick={getFetchArticles} >
                     Get a news crads</Button>
-                {loading && (
+                {articles.loading && (
                     <Box sx={{ display: 'flex' }}>
                         <CircularProgress />
                     </Box>
                 )}
-                {loading === false && articles.map((item) => (
+                {articles.loading === false && articles.articles.map((item) => (
                     <Card sx={{ maxWidth: 500 }} key={item.id}>
                         <CardActionArea>
                             <CardMedia
@@ -70,7 +73,7 @@ export function ArticlesPage() {
                     </Card>)
                 )
                 }
-                {error && (<p style={{ color: 'darkred', border: '1px solid darkred', padding: '5px' }}>{error}</p>)}
+                {articles.error && (<p style={{ color: 'darkred', border: '1px solid darkred', padding: '5px' }}>{articles.error}</p>)}
             </div>
         </>
     )
