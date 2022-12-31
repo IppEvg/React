@@ -1,6 +1,9 @@
+import { ClickAwayListener } from '@mui/material';
+import { useSelector } from 'react-redux';
 import { Outlet, NavLink } from 'react-router-dom'
 
 import styles from '../components/func/message.module.scss'
+import { logOut } from '../services/firebase';
 
 export const navigation = [
     {
@@ -37,6 +40,10 @@ const navigationSign = [{
 
 
 export function Header() {
+    const isAuth = useSelector((store)=>store.profile.isAuth)
+    const handleLogout = async()=>{
+       await logOut()
+    }
     return (
         <>
             <header className={styles.header}>
@@ -57,7 +64,10 @@ export function Header() {
                             </button>
                         ))}
                     </ul>
-                    <ul className={styles.ulRight}>
+                    
+                    {!isAuth&&(
+                        <>
+                        <ul className={styles.ulRight}>
                         {navigationSign.map((e) => (
                             <button key={e.id} className={styles.link}>
                                 <NavLink
@@ -72,6 +82,17 @@ export function Header() {
                             </button>
                         ))}
                     </ul>
+                        </>
+                    )}
+                     {isAuth&&(
+                        <>
+                        <ul className={styles.ulRight}>
+                            <button onClick={handleLogout} className={styles.link}>
+                                Logout
+                            </button>
+                    </ul>
+                        </>
+                    )}
 
                 </nav>
             </header>

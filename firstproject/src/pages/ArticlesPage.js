@@ -1,4 +1,4 @@
-import { useState } from "react"
+
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -12,7 +12,7 @@ import { api } from "../contants";
 import styles from '../components/func/message.module.scss'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { addArticlesWithReply, addArticles, addError, addLoading } from '../store/articles/actions'
+import { addArticlesWithReply, addError, addLoading } from '../store/articles/actions'
 export function ArticlesPage() {
 
     const articles = useSelector((store) => store.articles);
@@ -46,7 +46,7 @@ export function ArticlesPage() {
                     variant="contained"
                     className={styles.button}
                     onClick={getFetchArticles} >
-                    Get a news crads</Button>
+                    Get a news cards</Button>
                 {articles.loading && (
                     <Box sx={{ display: 'flex' }}>
                         <CircularProgress />

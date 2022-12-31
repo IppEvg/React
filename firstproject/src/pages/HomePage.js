@@ -7,7 +7,7 @@ import styles from '../components/func/message.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { setChat } from '../store/messages/actions'
 
-export function HomePage() {
+export function HomePage({messageDB}) {
 
   const chat = useSelector((store) => store.messages)
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ export function HomePage() {
         </div>
         <div style={{ width: '500px' }}>
           <MessageList title='Messages' chat={chat} messages={messages}></MessageList>
-          <Form chat={chat} ></Form>
+          <Form messageDB={messageDB} chat={chat} ></Form>
         </div>
       </div>
     </>

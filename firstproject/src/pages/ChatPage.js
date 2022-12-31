@@ -4,8 +4,10 @@ import { useState } from 'react'
 import {nanoid} from 'nanoid'
 import { useDispatch } from 'react-redux'
 import { addChat } from '../store/messages/actions'
+import {push, set, remove} from "firebase/database"
+import { messageRef } from '../services/firebase'
 
-export function ChatPage({delChat}){
+export function ChatPage({delChat,messageDB}){
     const [name,setName]=useState('')
    
     const dispatch = useDispatch()
@@ -13,6 +15,12 @@ export function ChatPage({delChat}){
         e.preventDefault();
         if (name!==''){
         dispatch(addChat({id:nanoid(), name:name,text:[],show:false}))
+        set(messageRef,{
+            ...messageDB,
+            [name]:{
+                name:name
+            }
+        })
         }
         setName('')
     }

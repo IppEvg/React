@@ -2,23 +2,33 @@ import { Button } from '../components/Ui/Button'
 
 import styles from '../components/func/message.module.scss'
 
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { signIn } from '../services/firebase'
+
 
 export function SignIn() {
-    const [inputs, setInputs] = useState({ login: '', password: '' })
+    const [inputs, setInputs] = useState({ email: '', password: '' })
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (inputs.login === 'name' && inputs.password === '123456') {
+        setError('');
+        setLoading(true);
+        try {
+            await signIn(inputs.email, inputs.password)
             dispatch({ type: "CHANGE_AUTH", payload: true })
             navigate('/')
-        } else {
-            setError('Login or password is false');
-            setInputs({ login: inputs.login, password: '' })
+        } catch (error) {
+            setError(error.message);
+            setInputs({ login: inputs.email, password: '' })
+        }finally{
+            setLoading(false)
         }
     }
 
@@ -27,12 +37,12 @@ export function SignIn() {
             <div className={styles.wrapNews}>
                 <p style={{ textAlign: 'center' }}> Your profile </p>
                 <form onSubmit={handleSubmit} id="myform">
-                    <p>Login:</p>
+                    <p>Email:</p>
                     <input
-                        placeholder='Login'
-                        value={inputs.login}
-                        name='login'
-                        type='text'
+                        placeholder='Email'
+                        value={inputs.email}
+                        name='email'
+                        type='email'
                         onChange={(e) => setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
                     ></input>
                     <p>Password:</p>
@@ -46,6 +56,11 @@ export function SignIn() {
                     ></input>
                 </form>
                 <Button type='submit' form='myform'>Sign in</Button>
+                {loading && (
+                    <Box sx={{ display: 'flex' }}>
+                        <CircularProgress />
+                    </Box>
+                )}
                 {error && (<p style={{ color: 'darkred', border: '1px solid darkred', padding: '5px' }}> {error}</p>)}
             </div>
         </>

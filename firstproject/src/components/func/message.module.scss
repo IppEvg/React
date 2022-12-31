@@ -18,6 +18,9 @@ ul{
    justify-content: center;
    align-items: center;
 }
+.ul{
+   display: block;
+}
 .ulRight{
    display: flex;
    flex-direction: column;
